@@ -5,8 +5,12 @@
     <title>Document</title>
 </head>
 <body>
-    <?php 
-    echo "Olá mundo!"
-    ?>
+   
+    "<h1>Olá mundo!</h1>"
+    <br/><br/>
+    <button onclick="location.href='view/cadUsuario.php'">
+    Cadastro de Usuário
+    </button>
+
 </body>
 </html>
