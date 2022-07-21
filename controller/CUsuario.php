@@ -3,17 +3,16 @@
 class CUSuario {
     public function inserir(){
         if(isset($_POST['salvar'])) {
-            var_dump($_POST);
             $nome = $_POST['nome'];
-            $user = $_POST['usuario'];
+            $nickname = $_POST['usuario'];
             $senha = $_POST['senha'];
-
+            
             $pdo = require_once '../pdo/Connection.php';
             $sql = 'insert into usuario values(null, ?, ?, ?)';
             $sth = $pdo->prepare($sql);
-            $sth->blindParam(1, $nome, PDO::PARAM_STR);
-            $sth->blindParam(2, $user, PDO::PARAM_STR);
-            $sth->blindParam(3, $senhaEc, PDO::PARAM_STR);
+            $sth->bindParam(1, $nome, PDO::PARAM_STR);
+            $sth->bindParam(2, $nickname, PDO::PARAM_STR);
+            $sth->bindParam(3, $senhaEc, PDO::PARAM_STR);
             $senhaEc = password_hash($senha, PASSWORD_DEFAULT);
             $sth->execute();
             unset($sth);
@@ -38,7 +37,7 @@ class CUSuario {
             $pdo = require_once '../pdo/Connection.php';
             $sql = 'delete from usuario where idUsuario = ?';
             $sth = $pdo->prepare($sql);
-            $sth->blindParam(1, $id, PDO::PARAM_INT);
+            $sth->bindParam(1, $id, PDO::PARAM_INT);
             $sth->execute();
             unset($sth);
             unset($pdo);
@@ -50,7 +49,7 @@ class CUSuario {
         $pdo = require_once '../pdo/Connection.php';
         $sql = 'select idUsuario, nomeusuario, usuario from usuario where idUsuario = ?';
         $sth = $pdo->prepare($sql);
-        $sth->blindParam(1, $id, PDO::PARAM_INT);
+        $sth->bindParam(1, $id, PDO::PARAM_INT);
         $sth->execute();
         $result = $sth->fetchAll();
         unset($sth);
@@ -65,9 +64,9 @@ class CUSuario {
             $pdo = require_once '../pdo/Connection.php';
             $sql = 'update usuario set senhaUsuario = ? where idUsuario = ?';
             $sth = $pdo->prepare($sql);
-            $sth->blindParam(1, $senhaPH, PDO::PARAM_STR);
+            $sth->bindParam(1, $senhaPH, PDO::PARAM_STR);
             $senhaPH = password_hash($novaSenha, PASSWORD_DEFAULT);
-            $sth->blindParam(2, $idUsuario, PDO::PARAM_INT);
+            $sth->bindParam(2, $idUsuario, PDO::PARAM_INT);
             $sth->execute();
             unset($sth);
             unset($pdo);
