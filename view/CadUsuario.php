@@ -18,10 +18,10 @@ $cadUsuario = new CUsuario();
         <input type="text" name="nome" placeholder="Digite seu nome">
         <br/><br/>
         <select name="perfilAcesso">
-            <option value="">Perfil Acesso</option>
+            <option value="">Selecione...</option>
             <option value="admin">Administrador</option>
             <option value="user">Usuário</option>
-        </select> 
+        </select>  
         <br/><br/>
         <input type="text" name="usuario" placeholder="Digite seu Nickname">
         <br/><br/>

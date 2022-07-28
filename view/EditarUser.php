@@ -5,7 +5,6 @@ if(isset($_POST['editar'])){
 require_once '../controller/CUsuario.php';
 $cadUser = new CUSuario();
 $user = $cadUser->getUsuarioById($id);
-var_dump($user);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -16,6 +15,29 @@ var_dump($user);
     <title>Document</title>
 </head>
 <body>
-    
+<h1>Editar usuário</h1>
+    <form action="../controller/UpdateUser.php" method="POST">
+        <input type="hidden" name="idUsuario" value="<?php echo $user[0] ['idUsuario'];?>">
+        <input type="text" name="nome" value="<?php echo $user[0] ['nomeusuario'];?>">
+        <br/><br/>
+        <select name="perfilAcesso">
+            <option value="">Perfil Acesso</option>
+            <option value="admin" <?php 
+            if ($user[0]['perfilAcesso'] == "admin") {
+                echo "selected";} ?>>
+                Administrador</option>
+            <option value="user" <?php 
+            if ($user[0]['perfilAcesso'] == "user") {
+                echo "selected";} ?>>
+                Usuário</option>
+        </select>
+        <br/><br/>
+        <input type="text" name="usuario" value="<?php echo $user[0] ['usuario'];?>">
+        <br/>
+        <input type="submit" name="salvar" value="Salvar">
+                
+        <input type="button" value="Voltar" onclick="location.href='listaUsuario.php'">
+        
+    </form>
 </body>
 </html>
